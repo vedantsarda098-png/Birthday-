@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sanvi 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --rose:#ff6fae;
+  --lav:#8b5cf6;
+  --gold:#ffd166;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  height:100vh;
+  font-family:Poppins,sans-serif;
+  overflow:hidden;
+  background:#000;
+}
+
+/* ---------- SCREENS ---------- */
+.screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:26px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease;
+}
+
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ---------- ENTRY ---------- */
+#s0{
+  background:#0d0d0d;
+  color:#fff;
+}
+
+#s0.light{
+  background:#f0f8ff;
+  color:#000;
+}
+
+#glow{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,240,250,.6),transparent 65%);
+  opacity:0;
+  transition:1.2s;
+  pointer-events:none;
+}
+#glow.show{opacity:1}
+
+/* ---------- TEXT ---------- */
+h1{
+  font-family:"Dancing Script";
+  font-size:3rem;
+  margin-bottom:10px;
+}
+
+p{
+  max-width:480px;
+  font-size:1.05rem;
+  line-height:1.6;
+}
+
+/* ---------- BUTTON ---------- */
+button{
+  padding:14px 38px;
+  border-radius:50px;
+  border:none;
+  background:linear-gradient(135deg,var(--rose),var(--lav));
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:28px;
+}
+
+/* ---------- BACKGROUNDS ---------- */
+#s1{background:#f0f8ff;color:#000}
+#s2{background:#ccffff;color:#003300}
+#s3{background:#cc99ff}
+#s4{background:#ffdda6;color:#000}
+#s20{background:linear-gradient(135deg,#ffd1dc,#c3cfe2);color:#000}
+
+/* ---------- SLIDES ---------- */
+.card{
+  background:#fff;
+  color:#2b0b16;
+  border-radius:28px;
+  padding:32px;
+  max-width:480px;
+  width:100%;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+}
+
+.gold-text{
+  color:#ffd166;
+}
+
+.blue-text{
+  color:#3366cc;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENTRY -->
+<div id="s0" class="screen active">
+  <div id="glow"></div>
+  <h1 id="s0text">Why is it so dark here… 🌑</h1>
+  <button onclick="turnOnLights()">Turn on lights ✨</button>
+</div>
+
+<!-- SCREEN 1 -->
+<div id="s1" class="screen">
+  <h1>Now I can see… 👀✨</h1>
+  <p>
+    But suddenly…<br>
+    why am I feeling something special?<br><br>
+    Please tap below so I can know why.
+  </p>
+  <button onclick="go('s2')">Tap gently ✨</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="s2" class="screen">
+  <h1>Hmm… 💭</h1>
+  <p>Now I know why I’m feeling special.</p>
+  <button onclick="go('s3')">Hmm… why?</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="s3" class="screen">
+  <h1>Because it is</h1>
+  <h1 style="color:var(--gold)">18th January</h1>
+  <p>
+    The birthday of the <br>
+    <span class="blue-text">smartest, sweetest, cutest and the most beautiful girl</span><br>
+    in the universe 🌠
+  </p>
+  <button onclick="go('s4')">Next</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div id="s4" class="screen">
+  <h1>
+    HAPPY BIRTHDAY<br>
+    <span class="gold-text">SANVIIIEEE</span> 🎂💖
+  </h1>
+  <button onclick="go('s20')">Next ✨</button>
+</div>
+
+<!-- SLIDES -->
+<div id="s20" class="screen">
+  <div class="card">
+    <h2 id="slideTitle"></h2>
+    <p id="slideText" style="margin-top:14px"></p>
+    <p style="opacity:.7;margin-top:18px">⬅ Swipe ➡</p>
+  </div>
+</div>
+
+<script>
+/* ---------- NAV ---------- */
+function go(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if(id==="s20"){
+    slideIndex = 0;
+    showSlide();
+  }
+}
+
+/* ---------- LIGHTS ---------- */
+function turnOnLights(){
+  document.getElementById("glow").classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("s0").classList.add("light");
+    document.getElementById("s0text").innerText = "Now I can see… 👀✨";
+  },800);
+
+  setTimeout(()=>{
+    go("s1");
+  },2500);
+}
+
+/* ---------- SLIDES DATA ---------- */
+const slides = [
+  {
+    title:"🎂 Happy Birthday Bestiee",
+    text:"Welcome to your 17th year 🌸 May this year bring courage, confidence, peace, happiness — and many days where your brain agrees to rest."
+  },
+  {
+    title:"💖 Always Special",
+    text:"Ek baat yaad rakhna — tu mere liye bohot special hai. Hamesha rahegi. No conditions. No explanations."
+  },
+  {
+    title:"🫶 Support Mode Always ON",
+    text:"Jab bhi cheezein heavy lagne lage, mood off ho, ya bas kisi ko daantne ka mann kare — yaad karna uss good boy ko jo hamesha ready hai sunne ke liye, help ke liye, care ke liye."
+  },
+  {
+    title:"✨ You — In One Paragraph",
+    text:"Tu ek cutie hai, smart hai, intelligent hai, thodi si bhootni bhi 😌, aur definitely ek golden girl ✨"
+  }
+];
+
+let slideIndex = 0;
+
+function showSlide(){
+  document.getElementById("slideTitle").innerText = slides[slideIndex].title;
+  document.getElementById("slideText").innerText = slides[slideIndex].text;
+}
+
+/* ---------- SWIPE ---------- */
+let startX=0;
+document.addEventListener("touchstart",e=>{
+  startX=e.touches[0].clientX;
+});
+document.addEventListener("touchend",e=>{
+  let diff=e.changedTouches[0].clientX-startX;
+  if(Math.abs(diff)<50) return;
+  if(!document.getElementById("s20").classList.contains("active")) return;
+  if(diff<0 && slideIndex<slides.length-1) slideIndex++;
+  if(diff>0 && slideIndex>0) slideIndex--;
+  showSlide();
+});
+</script>
+
+</body>
+</html>
