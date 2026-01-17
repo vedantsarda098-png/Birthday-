@@ -18,75 +18,84 @@ body{
   overflow:hidden;
 }
 
+/* ========== SCREENS ========== */
 .screen{
   position:fixed;
   inset:0;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   text-align:center;
   padding:24px;
   opacity:0;
   pointer-events:none;
-  transition:opacity .7s ease;
+  transition:.8s;
 }
-.screen.active{opacity:1;pointer-events:auto}
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
+}
 
+/* ========== BUTTON ========== */
+button{
+  padding:14px 36px;
+  border:none;
+  border-radius:40px;
+  font-size:1rem;
+  font-weight:600;
+  margin-top:24px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff6fae,#8b5cf6);
+  color:#fff;
+}
+
+/* ========== ENTRY GLOW ========== */
+#glow{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,200,230,.6),transparent 65%);
+  opacity:0;
+  transition:1.2s;
+  pointer-events:none;
+}
+#glow.show{opacity:1}
+
+/* ========== BACKGROUNDS ========== */
+#s0{background:#0b0b0b}
+#s0.light{background:#f0f8ff;color:#000}
+
+#s1{background:#f0f8ff;color:#000}
+#s2{background:#ccffff;color:#003}
+#s3{background:#cc99ff}
+#s4{background:#ffdda6;color:#000}
+#sFinal{background:linear-gradient(135deg,#fbc2eb,#a6c1ee);color:#000}
+
+/* ========== TEXT ========== */
 h1{
   font-family:"Dancing Script";
   font-size:3rem;
 }
 p{
-  max-width:420px;
+  max-width:500px;
+  font-size:1.1rem;
   line-height:1.6;
 }
 
-button{
-  margin-top:26px;
-  padding:14px 36px;
-  border:none;
-  border-radius:40px;
-  background:linear-gradient(135deg,#ff6fae,#8b5cf6);
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* ENTRY */
-#s0{background:#0d0d0d}
-#glow{
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle,rgba(255,240,250,.55),transparent 70%);
-  opacity:0;
-  transition:1.2s;
-}
-#glow.show{opacity:1}
-
-/* NORMAL SCREENS */
-#s1,#s2,#s3{background:#f0f8ff;color:#000}
-#s4{background:#ffdda6;color:#000}
-
-/* MESSAGE SCREEN */
-#s5{
-  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
-  color:#000;
-}
-
-/* CONFETTI */
+/* ========== CONFETTI ========== */
 .confetti{
   position:fixed;
   top:-10px;
   width:10px;
   height:14px;
+  background:red;
   animation:fall linear forwards;
 }
 @keyframes fall{
   to{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
-/* FIREWORKS */
+/* ========== FIREWORKS ========== */
 .fire{
   position:fixed;
   width:8px;
@@ -98,7 +107,7 @@ button{
   to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
 }
 
-/* ROCKET */
+/* ========== ROCKET ========== */
 .rocket{
   position:fixed;
   bottom:-20px;
@@ -121,6 +130,17 @@ button{
 @keyframes explode{
   to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
 }
+
+/* ========== CARD ========== */
+.card{
+  background:#fff;
+  color:#222;
+  padding:34px;
+  border-radius:30px;
+  max-width:520px;
+  width:100%;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+}
 </style>
 </head>
 
@@ -130,95 +150,93 @@ button{
 <div id="s0" class="screen active">
   <div id="glow"></div>
   <h1 id="s0text">Why is it so dark here… 🌑</h1>
-  <button onclick="turnOnLights()">Turn on lights ✨</button>
+  <button id="lightBtn">Turn on lights ✨</button>
 </div>
 
-<!-- SCREEN 1 -->
 <div id="s1" class="screen">
   <h1>Now I can see… 👀✨</h1>
   <p>But suddenly… why am I feeling something special?</p>
   <button onclick="go('s2')">Tap gently ✨</button>
 </div>
 
-<!-- SCREEN 2 -->
 <div id="s2" class="screen">
   <h1>Hmm… 💭</h1>
   <p>Now I know why I’m feeling special.</p>
   <button onclick="go('s3')">Hmm… why?</button>
 </div>
 
-<!-- SCREEN 3 -->
 <div id="s3" class="screen">
   <h1>Because it is</h1>
-  <h1 style="color:#ffd166">18th January</h1>
-  <p>The birthday of the smartest, sweetest, cutest and the most beautiful girl in the universe 🌠</p>
+  <h1>18th January</h1>
+  <p>The birthday of the smartest, sweetest, cutest and most beautiful girl 🌠</p>
   <button onclick="go('s4')">Next</button>
 </div>
 
-<!-- SCREEN 4 : CELEBRATION -->
 <div id="s4" class="screen">
-  <h1>HAPPY BIRTHDAY<br>SANVIIIEEE 🎂💖</h1>
+  <h1>HAPPY BIRTHDAY</h1>
+  <h1>SANVIIIEEE 🎂💖</h1>
 </div>
 
-<!-- MESSAGE SCREEN -->
-<div id="s5" class="screen">
-  <h1 id="msgTitle"></h1>
-  <p id="msgText"></p>
-  <button onclick="nextMsg()">Next ✨</button>
+<!-- FINAL SLIDES -->
+<div id="sFinal" class="screen">
+  <div class="card">
+    <h2 id="finalTitle"></h2>
+    <p id="finalText" style="margin-top:16px"></p>
+    <p style="opacity:.6;margin-top:18px">Tap anywhere →</p>
+  </div>
 </div>
 
 <script>
-let screens=document.querySelectorAll(".screen");
-
+/* ========== NAV ========== */
 function go(id){
-  screens.forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 
   if(id==="s4"){
     bigCelebration();
     rocketShow();
-    setTimeout(()=>go("s5"),4500);
+    setTimeout(()=>go("sFinal"),4500);
   }
 }
 
-/* ENTRY */
-function turnOnLights(){
+/* ========== ENTRY FIXED ========== */
+document.getElementById("lightBtn").onclick=()=>{
   document.getElementById("glow").classList.add("show");
-  setTimeout(()=>{
-    go("s1");
-  },2500);
-}
+  document.getElementById("s0").classList.add("light");
+  document.getElementById("s0text").innerText="Now I can see… 👀✨";
+  setTimeout(()=>go("s1"),2500);
+};
 
-/* CONFETTI */
+/* ========== CONFETTI ========== */
 function softConfetti(n){
   for(let i=0;i<n;i++){
     const c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
-    c.style.background=["#ff6fae","#ffd166","#a8e6cf"][Math.random()*3|0];
+    c.style.background=["#ff6fae","#ffd166","#a8e6cf","#fff"][Math.random()*4|0];
     c.style.animationDuration=3+Math.random()*2+"s";
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),6000);
   }
 }
 
-/* FIREWORKS */
+/* ========== FIREWORKS ========== */
 function bigCelebration(){
   softConfetti(300);
-  for(let i=0;i<140;i++){
+  for(let i=0;i<120;i++){
     const f=document.createElement("div");
     f.className="fire";
-    f.style.background=["#ff6fae","#ffd166","#fff","#a8e6cf"][Math.random()*4|0];
     f.style.left="50vw";
     f.style.top="50vh";
+    f.style.background=["#ff6fae","#ffd166","#fff","#a8e6cf"][Math.random()*4|0];
     f.style.setProperty("--x",(Math.random()-0.5)*900+"px");
     f.style.setProperty("--y",(Math.random()-0.5)*900+"px");
     document.body.appendChild(f);
-    setTimeout(()=>f.remove(),1800);
+    setTimeout(()=>f.remove(),1600);
   }
 }
 
-/* ROCKETS */
+/* ========== ROCKETS ========== */
 function rocketShow(){
   for(let i=0;i<14;i++){
     setTimeout(()=>{
@@ -238,45 +256,32 @@ function rocketShow(){
           s.style.setProperty("--x",(Math.random()-0.5)*500+"px");
           s.style.setProperty("--y",(Math.random()-0.5)*500+"px");
           document.body.appendChild(s);
-          setTimeout(()=>s.remove(),1600);
+          setTimeout(()=>s.remove(),1500);
         }
       },900);
-    },i*260);
+    },i*250);
   }
 }
 
-/* MESSAGES */
-const messages=[
-{
-title:"🎂 Happy Birthday Bestiee",
-text:"Welcome to your 17th year 🌸 May this year bring courage, confidence, peace, happiness — and many days where your brain agrees to rest."
-},
-{
-title:"💖 Always Special",
-text:"Ek baat yaad rakhna — tu mere liye bohot special hai. Hamesha rahegi. No conditions. No explanations."
-},
-{
-title:"🫶 Support Mode Always ON",
-text:"Jab bhi cheezein heavy lagne lage, mood off ho, ya bas kisi ko daantne ka mann kare — yaad karna uss good boy ko jo hamesha ready hai sunne ke liye."
-},
-{
-title:"✨ You — In One Paragraph",
-text:"Tu ek cutie hai, smart hai, intelligent hai, thodi si bhootni bhi 😌, aur definitely ek golden girl ✨"
-}
+/* ========== FINAL SLIDES ========== */
+const slides=[
+{title:"🎂 Happy Birthday Bestiee",text:"Welcome to your 17th year 🌸\nMay this year bring courage, confidence, peace, happiness — and many days where your brain agrees to rest 😌✨"},
+{title:"💖 Always Special",text:"Ek baat yaad rakhna —\ntu mere liye bohot special hai.\nHamesha rahegi.\nNo conditions. No explanations."},
+{title:"🫶 Support Mode ON",text:"Jab bhi cheezein heavy lagein ya mood off ho — yaad karna uss good boy ko jo hamesha ready hai sunne, help aur care ke liye."},
+{title:"✨ You",text:"Tu ek cutie hai, smart hai, intelligent hai, thodi si bhootni 😌 aur definitely ek golden girl ✨"},
+{title:"🤍 From the Heart",text:"Aaj bas enjoy karo.\nZyada mat socho.\nAur haan — kisi ne thoda zyada smile kiya while making this website… sirf uss cute si bhootni ke liye 🤍"}
 ];
 
-let msgIndex=0;
-function showMsg(){
-  document.getElementById("msgTitle").innerText=messages[msgIndex].title;
-  document.getElementById("msgText").innerText=messages[msgIndex].text;
+let i=0;
+function showFinal(){
+  document.getElementById("finalTitle").innerText=slides[i].title;
+  document.getElementById("finalText").innerText=slides[i].text;
 }
-function nextMsg(){
-  msgIndex++;
-  if(msgIndex<messages.length){
-    showMsg();
-  }
-}
-showMsg();
+showFinal();
+
+document.getElementById("sFinal").onclick=()=>{
+  if(i<slides.length-1){i++;showFinal();}
+};
 </script>
 
 </body>
